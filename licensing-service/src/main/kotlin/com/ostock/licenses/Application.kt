@@ -1,4 +1,4 @@
-package com.ostock.licensingservice
+package com.ostock.licenses
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

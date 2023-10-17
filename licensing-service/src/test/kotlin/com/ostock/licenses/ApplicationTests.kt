@@ -1,4 +1,4 @@
-package com.ostock.licensingservice
+package com.ostock.licenses
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
