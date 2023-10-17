@@ -1,11 +1,14 @@
 package com.ostock.licenses.services
 
 import com.ostock.licenses.model.License
+import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class LicenseService {
+class LicenseService(
+    private val messages: MessageSource,
+) {
     fun getLicense(licenseId: String, organizationId: String) =
         License(
             id = Random().nextInt(1000),
@@ -16,16 +19,16 @@ class LicenseService {
             licenseType = "full",
         )
 
-    fun createLicense(license: License?, organizationId: String) =
+    fun createLicense(license: License?, organizationId: String, locale: Locale) =
         license?.let {
             it.organizationId = organizationId
-            "This is the post and the object is $license"
+            String.format(messages.getMessage("license.create.message", null, locale), license.toString())
         }
 
-    fun updateLicense(license: License?, organizationId: String) =
+    fun updateLicense(license: License?, organizationId: String, locale: Locale) =
         license?.let {
             it.organizationId = organizationId
-            "This is the put and the object is $license"
+            String.format(messages.getMessage("license.create.message", null, Locale.getDefault()), license.toString())
         }
 
     fun deleteLicense(licenseId: String, organizationId: String) =
