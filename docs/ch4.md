@@ -1,0 +1,5 @@
+- Docker, docker compose 에 관한 내용이라 별도 정리 X
+- 개인적으로 [`jib`](https://github.com/GoogleContainerTools/jib) 사용해서 이미지 생성하는 것을 좋아한다.
+  - 심지어 OCI 에 맞춘 이미지를 생성해주는 듯 하다.
+- 이외의 방법을 골라야 한다면 Spring Boot 의 기능을 사용할 듯 한데, Docker Host 를 필요로 하기 때문에 그닥 매력적이게 보이진 않는다.
+- CI 과정을 거칠 수 있다면 multi-stage 로 빌드하는 것도 좋은 방법일 것 같다.
