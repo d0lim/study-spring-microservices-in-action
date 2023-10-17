@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @RestController
 @RequestMapping("/v1/organization/{organizationId}/license")
@@ -32,8 +34,9 @@ class LicenseController(
     fun createLicense(
         @PathVariable("organizationId") organizationId: String,
         @RequestBody request: License?,
+        @RequestHeader("Accept-Language", required = false) locale: Locale = Locale.getDefault(),
     ): ResponseEntity<String> {
-        val createResult = licenseService.createLicense(request, organizationId)
+        val createResult = licenseService.createLicense(request, organizationId, locale)
 
         return ResponseEntity.ok(createResult)
     }
@@ -42,8 +45,9 @@ class LicenseController(
     fun updateLicense(
         @PathVariable("organizationId") organizationId: String,
         @RequestBody request: License?,
+        @RequestHeader("Accept-Language", required = false) locale: Locale = Locale.getDefault(),
     ): ResponseEntity<String> {
-        val updateResult = licenseService.updateLicense(request, organizationId)
+        val updateResult = licenseService.updateLicense(request, organizationId, locale)
 
         return ResponseEntity.ok(updateResult)
     }
