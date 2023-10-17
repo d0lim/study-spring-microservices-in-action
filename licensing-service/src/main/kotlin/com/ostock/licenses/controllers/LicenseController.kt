@@ -2,6 +2,8 @@ package com.ostock.licenses.controllers
 
 import com.ostock.licenses.model.License
 import com.ostock.licenses.services.LicenseService
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,6 +28,29 @@ class LicenseController(
         @PathVariable("licenseId") licenseId: String,
     ): ResponseEntity<License> {
         val license = licenseService.getLicense(licenseId, organizationId)
+
+        license.add(
+            linkTo(methodOn(LicenseController::class.java).getLicense(organizationId, license.licenseId)).withSelfRel(),
+            linkTo(
+                methodOn(LicenseController::class.java).createLicense(
+                    organizationId,
+                    license,
+                    Locale.getDefault(),
+                ),
+            ).withRel("createLicense"),
+            linkTo(
+                methodOn(LicenseController::class.java).updateLicense(
+                    organizationId,
+                    license,
+                ),
+            ).withRel("updateLicense"),
+            linkTo(
+                methodOn(LicenseController::class.java).deleteLicense(
+                    organizationId,
+                    license.licenseId,
+                ),
+            ).withRel("deleteLicense"),
+        )
 
         return ResponseEntity.ok(license)
     }
