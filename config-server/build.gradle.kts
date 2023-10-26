@@ -59,7 +59,7 @@ jib {
         }
     }
     to {
-        image = "ostock/licensing-service"
+        image = "ostock/config-server"
         tags = setOf("latest")
     }
 }
