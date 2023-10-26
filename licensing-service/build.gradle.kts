@@ -7,6 +7,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.4.0"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
+    kotlin("plugin.jpa") version "1.8.22"
 }
 
 group = "com.ostock"
