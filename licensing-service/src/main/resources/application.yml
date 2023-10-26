@@ -1,6 +1,8 @@
 spring:
   application:
     name: licensing-service
+  config:
+    import: "configserver:"
   profiles:
     active: dev
   cloud:
