@@ -58,10 +58,10 @@ class LicenseController(
     @PostMapping
     fun createLicense(
         @PathVariable("organizationId") organizationId: String,
-        @RequestBody request: License?,
+        @RequestBody request: License,
         @RequestHeader("Accept-Language", required = false) locale: Locale = Locale.getDefault(),
-    ): ResponseEntity<String> {
-        val createResult = licenseService.createLicense(request, organizationId, locale)
+    ): ResponseEntity<License> {
+        val createResult = licenseService.createLicense(request)
 
         return ResponseEntity.ok(createResult)
     }
@@ -69,10 +69,10 @@ class LicenseController(
     @PutMapping
     fun updateLicense(
         @PathVariable("organizationId") organizationId: String,
-        @RequestBody request: License?,
+        @RequestBody request: License,
         @RequestHeader("Accept-Language", required = false) locale: Locale = Locale.getDefault(),
-    ): ResponseEntity<String> {
-        val updateResult = licenseService.updateLicense(request, organizationId, locale)
+    ): ResponseEntity<License> {
+        val updateResult = licenseService.updateLicense(request)
 
         return ResponseEntity.ok(updateResult)
     }
@@ -82,7 +82,7 @@ class LicenseController(
         @PathVariable("organizationId") organizationId: String,
         @PathVariable("licenseId") licenseId: String,
     ): ResponseEntity<String> {
-        val deleteResult = licenseService.deleteLicense(licenseId, organizationId)
+        val deleteResult = licenseService.deleteLicense(licenseId)
 
         return ResponseEntity.ok(deleteResult)
     }
