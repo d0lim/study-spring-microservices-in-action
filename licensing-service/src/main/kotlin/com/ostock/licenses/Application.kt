@@ -12,7 +12,7 @@ import java.util.*
 @SpringBootApplication
 class Application {
     @Bean
-    fun localeResolver(): LocaleResolver {
+    fun serviceLocaleResolver(): LocaleResolver {
         val localeResolver = SessionLocaleResolver()
         localeResolver.setDefaultLocale(Locale.US)
         return localeResolver
