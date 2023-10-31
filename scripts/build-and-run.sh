@@ -10,4 +10,4 @@ cd ..
 cd organization-service
 ./gradlew jibDockerBuild
 cd ..
-docker compose -f ./docker/docker-compose.yml up -d
+docker compose -f ./docker/docker-compose.yml up -d --force-recreate
