@@ -62,7 +62,7 @@ jib {
         }
     }
     to {
-        image = "ostock/licensing-service"
+        image = "ostock/eureka-server"
         tags = setOf("latest")
     }
 }
