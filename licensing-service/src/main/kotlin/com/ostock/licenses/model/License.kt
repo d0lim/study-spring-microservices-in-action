@@ -27,6 +27,19 @@ class License(
     @Column(name = "comment")
     var comment: String,
 ) : RepresentationModel<License?>() {
+
+    @Transient
+    var organizationName: String? = null
+
+    @Transient
+    var contactName: String? = null
+
+    @Transient
+    var contactPhone: String? = null
+
+    @Transient
+    var contactEmail: String? = null
+
     fun withComment(comment: String): License {
         this.comment = comment
         return this
