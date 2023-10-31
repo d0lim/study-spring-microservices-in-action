@@ -1,6 +1,8 @@
 spring:
   application:
     name: organization-service
+  config:
+    import: "configserver:"
   profiles:
     active: dev
   cloud:
