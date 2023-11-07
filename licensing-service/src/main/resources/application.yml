@@ -41,7 +41,7 @@ resilience4j.ratelimiter:
 resilience4j.retry:
   instances:
     retryLicenseService:
-      maxAttempts: : 5
+      maxAttempts: 5
       waitDuration: 10000
       retry-exceptions:
         - java.util.concurrent.TimeoutException
