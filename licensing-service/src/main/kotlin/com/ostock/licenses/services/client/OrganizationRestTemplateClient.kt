@@ -11,7 +11,7 @@ class OrganizationRestTemplateClient(
 ) {
     fun getOrganization(organizationId: String): Organization? {
         val restExchange = restTemplate.exchange(
-            "http://organizationservice/v1/organization/{organizationId}",
+            "http://organizationservice:8081/{organizationId}",
             HttpMethod.GET,
             null,
             Organization::class.java,
