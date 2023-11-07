@@ -9,7 +9,6 @@ import com.ostock.licenses.services.client.OrganizationFeignClient
 import com.ostock.licenses.services.client.OrganizationRestTemplateClient
 import com.ostock.licenses.utils.UserContext
 import com.ostock.licenses.utils.UserContextHolder
-import io.github.resilience4j.bulkhead.annotation.Bulkhead
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter
 import io.github.resilience4j.retry.annotation.Retry
@@ -61,11 +60,13 @@ class LicenseService(
     @CircuitBreaker(name = "licenseService", fallbackMethod = "buildFallbackLicenseList")
     @RateLimiter(name = "licenseService", fallbackMethod = "buildFallbackLicenseList")
     @Retry(name = "retryLicenseService", fallbackMethod = "buildFallbackLicenseList")
-    @Bulkhead(
-        name = "bulkheadLicenseService",
-        fallbackMethod = "buildFallbackLicenseList",
-        type = Bulkhead.Type.THREADPOOL,
-    )
+    // ThreadPool bulkhead is only applicable for completable futures
+//    @Bulkhead(
+//        name = "bulkheadLicenseService",
+//        fallbackMethod = "buildFallbackLicenseList",
+//        type = Bulkhead.Type.THREADPOOL,
+//    )
+//    @CircuitBreaker(name = "licenseService")
     @Throws(TimeoutException::class)
     fun getLicensesByOrganization(organizationId: String): List<License> {
         logger.debug("getLicensesByOrganization Correlation id: ${UserContextHolder.getContext().correlationId}")
