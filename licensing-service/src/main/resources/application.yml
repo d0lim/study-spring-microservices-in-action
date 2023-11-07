@@ -9,6 +9,10 @@ spring:
     config:
       uri: http://configserver:8071
 
+logging:
+  level:
+    root: debug
+
 resilience4j.circuitbreaker:
   instances:
     licenseService:
@@ -17,7 +21,6 @@ resilience4j.circuitbreaker:
       minimumNumberOfCalls: 5
       slidingWindowType: count_based
       waitDurationInOpenState: 10s
-      failureRateThreshold: 50
       recordExceptions:
         - org.springframework.web.client.HttpServerErrorException
         - java.io.IOException
@@ -29,7 +32,6 @@ resilience4j.circuitbreaker:
       minimumNumberOfCalls: 6
       slidingWindowType: count_based
       waitDurationInOpenState: 20s
-      failureRateThreshold: 60
 
 resilience4j.ratelimiter:
   instances:
