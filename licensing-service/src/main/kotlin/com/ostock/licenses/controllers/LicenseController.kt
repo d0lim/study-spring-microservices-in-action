@@ -55,6 +55,17 @@ class LicenseController(
         return ResponseEntity.ok(license)
     }
 
+    @GetMapping("/{licenseId}/{clientType}")
+    fun getLicensesWithClient(
+        @PathVariable("organizationId") organizationId: String,
+        @PathVariable("licenseId") licenseId: String,
+        @PathVariable("clientType") clientType: String,
+    ): ResponseEntity<License> {
+        val license = licenseService.getLicense(licenseId, organizationId, clientType)
+
+        return ResponseEntity.ok(license)
+    }
+
     @PostMapping
     fun createLicense(
         @PathVariable("organizationId") organizationId: String,
