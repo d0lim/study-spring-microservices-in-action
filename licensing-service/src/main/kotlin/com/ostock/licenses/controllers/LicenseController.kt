@@ -2,6 +2,8 @@ package com.ostock.licenses.controllers
 
 import com.ostock.licenses.model.License
 import com.ostock.licenses.services.LicenseService
+import com.ostock.licenses.utils.UserContextHolder
+import org.slf4j.LoggerFactory
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 import org.springframework.http.ResponseEntity
@@ -21,6 +23,7 @@ import java.util.*
 class LicenseController(
     private val licenseService: LicenseService,
 ) {
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping("/{licenseId}")
     fun getLicense(
@@ -96,5 +99,11 @@ class LicenseController(
         val deleteResult = licenseService.deleteLicense(licenseId)
 
         return ResponseEntity.ok(deleteResult)
+    }
+
+    @GetMapping
+    fun getLicenses(@PathVariable("organizationId") organizationId: String): List<License> {
+        logger.debug("LicenseServiceController Correlation id: ${UserContextHolder.getContext().correlationId}")
+        return licenseService.getLicensesByOrganization(organizationId)
     }
 }
