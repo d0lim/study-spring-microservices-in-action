@@ -1,6 +1,9 @@
 cd config-server
 ./gradlew jibDockerBuild
 cd ..
+cd gateway-server
+./gradlew jibDockerBuild
+cd ..
 cd eureka-server
 ./gradlew jibDockerBuild
 cd ..
