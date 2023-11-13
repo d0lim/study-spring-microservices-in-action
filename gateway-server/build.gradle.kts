@@ -64,7 +64,7 @@ jib {
         }
     }
     to {
-        image = "ostock/organization-service"
+        image = "ostock/gateway-server"
         tags = setOf("latest")
     }
 }
