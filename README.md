@@ -12,3 +12,9 @@ sh scripts/build-and-run.sh
 ```sh
 sh scripts/build-and-run-parallel.sh
 ```
+
+### Installation via brew (mac only)
+
+```sh
+brew install parallel
+```
