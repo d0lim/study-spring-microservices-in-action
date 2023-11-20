@@ -6,3 +6,9 @@
 ```sh
 sh scripts/build-and-run.sh
 ```
+
+## If you are using GNU parallel
+
+```sh
+sh scripts/build-and-run-parallel.sh
+```

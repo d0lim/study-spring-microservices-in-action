@@ -1,0 +1,2 @@
+parallel -j 5 --progress sh scripts/build-single.sh {} ::: config-server gateway-server eureka-server licensing-service organization-service
+docker compose -f ./docker/docker-compose.yml up -d --force-recreate
