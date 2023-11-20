@@ -30,7 +30,7 @@ class LicenseController(
         @PathVariable("organizationId") organizationId: String,
         @PathVariable("licenseId") licenseId: String,
     ): ResponseEntity<License> {
-        val license = licenseService.getLicense(licenseId, organizationId, "discovery")
+        val license = licenseService.getLicense(licenseId, organizationId, "rest")
 
         license.add(
             linkTo(methodOn(LicenseController::class.java).getLicense(organizationId, license.licenseId)).withSelfRel(),

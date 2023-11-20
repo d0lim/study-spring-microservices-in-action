@@ -1,13 +1,13 @@
 package com.ostock.licenses.services.client
 
 import com.ostock.licenses.model.Organization
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Component
-import org.springframework.web.client.RestTemplate
 
 @Component
 class OrganizationRestTemplateClient(
-    private val restTemplate: RestTemplate,
+    private val restTemplate: KeycloakRestTemplate,
 ) {
     fun getOrganization(organizationId: String): Organization? {
         val restExchange = restTemplate.exchange(

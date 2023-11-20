@@ -30,6 +30,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("commons-codec:commons-codec:1.16.0")
+    implementation("org.json:json:20231013")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

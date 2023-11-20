@@ -20,6 +20,10 @@ class FilterUtils {
         return requestHeaders[CORRELATION_ID]?.first()
     }
 
+    fun getAuthToken(requestHeaders: HttpHeaders): String {
+        return requestHeaders[AUTH_TOKEN]?.first()!!
+    }
+
     fun setRequestHeader(exchange: ServerWebExchange, name: String, value: String): ServerWebExchange =
         exchange.mutate().request {
             exchange.request.mutate()
