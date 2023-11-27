@@ -69,7 +69,7 @@ class LicenseService(
 //    @CircuitBreaker(name = "licenseService")
     @Throws(TimeoutException::class)
     fun getLicensesByOrganization(organizationId: String): List<License> {
-        logger.debug("getLicensesByOrganization Correlation id: ${UserContextHolder.getContext().correlationId}")
+        logger.debug("getLicensesByOrganization Correlation id: ${UserContextHolder.getContext().getCorrelationId()}")
         randomlyRunLong()
         return licenseRepository.findByOrganizationId(organizationId)
     }

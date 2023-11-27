@@ -1,4 +1,4 @@
-package com.ostock.licenses.utils
+package com.example.organizationservice.utils
 
 import jakarta.servlet.Filter
 import jakarta.servlet.FilterChain

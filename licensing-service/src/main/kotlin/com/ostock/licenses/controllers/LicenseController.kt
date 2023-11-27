@@ -103,7 +103,7 @@ class LicenseController(
 
     @GetMapping
     fun getLicenses(@PathVariable("organizationId") organizationId: String): List<License> {
-        logger.debug("LicenseServiceController Correlation id: ${UserContextHolder.getContext().correlationId}")
+        logger.debug("LicenseServiceController Correlation id: ${UserContextHolder.getContext().getCorrelationId()}")
         return licenseService.getLicensesByOrganization(organizationId)
     }
 }
