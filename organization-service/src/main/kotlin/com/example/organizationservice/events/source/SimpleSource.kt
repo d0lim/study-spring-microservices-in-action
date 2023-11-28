@@ -5,6 +5,8 @@ import com.example.organizationservice.utils.ActionEnum
 import com.example.organizationservice.utils.UserContext
 import org.slf4j.LoggerFactory
 import org.springframework.cloud.stream.function.StreamBridge
+import org.springframework.messaging.support.MessageBuilder
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
 @Component
@@ -13,8 +15,9 @@ class SimpleSource(
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
+    @Async
     fun publishOrganizationChange(action: ActionEnum, organizationId: String) {
-        logger.debug("Sending Kafka Message $action for Organization Id : $organizationId")
+        logger.info("Sending Kafka Message $action for Organization Id : $organizationId")
 
         val organization = OrganizationChangeModel(
             OrganizationChangeModel::class.java.typeName,
@@ -23,6 +26,6 @@ class SimpleSource(
             UserContext.getCorrelationId(),
         )
 
-        streamBridge.send("output-out-0", organization)
+        streamBridge.send("output-out-0", MessageBuilder.withPayload(organization).build())
     }
 }

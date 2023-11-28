@@ -11,7 +11,7 @@ spring:
 
 logging:
   level:
-    root: debug
+    root: info
 
 resilience4j.circuitbreaker:
   instances:
