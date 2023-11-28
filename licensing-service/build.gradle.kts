@@ -27,8 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.data:spring-data-redis")
-    implementation("io.lettuce:lettuce-core:6.3.0.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("io.github.resilience4j:resilience4j-spring-boot3")
     implementation("io.github.resilience4j:resilience4j-circuitbreaker")
@@ -79,5 +78,10 @@ jib {
     to {
         image = "ostock/licensing-service"
         tags = setOf("latest")
+    }
+    container {
+        jvmFlags = listOf(
+            "--add-opens=java.base/java.nio.charset=ALL-UNNAMED",
+        )
     }
 }
