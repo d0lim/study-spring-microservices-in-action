@@ -15,6 +15,8 @@ class UserContextInterceptor : ClientHttpRequestInterceptor {
     ): ClientHttpResponse {
         val headers: HttpHeaders = request.headers
         headers.add(UserContext.CORRELATION_ID, UserContextHolder.getContext().getCorrelationId())
+        headers.add(UserContext.USER_ID, UserContextHolder.getContext().getUserId())
+        headers.add(UserContext.ORG_ID, UserContextHolder.getContext().getOrganizationId())
         headers.add(UserContext.AUTH_TOKEN, UserContextHolder.getContext().getAuthToken())
         return execution.execute(request, body)
     }

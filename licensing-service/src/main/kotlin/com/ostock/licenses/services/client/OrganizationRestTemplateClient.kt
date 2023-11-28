@@ -24,7 +24,7 @@ class OrganizationRestTemplateClient(
         }
         logger.debug("Unable to locate organization from the redis cache: $organizationId")
         val restExchange = restTemplate.exchange(
-            "http://gateway:8072/organization/v1/organization/{organizationId}",
+            "http://gateway-server:8072/organization/{organizationId}",
             HttpMethod.GET,
             null,
             Organization::class.java,
