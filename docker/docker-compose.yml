@@ -27,6 +27,11 @@ services:
       - "8071:8071"
     environment:
       ENCRYPT_KEY: "fje83Ki8403Iod87dne7Yjsl3THueh48jfuO9j4U2hf64Lo"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health | grep UP || exit 1"
+      interval: 1s
+      timeout: 5s
+      retries: 10
     networks:
       backend:
         aliases:
@@ -39,7 +44,12 @@ services:
       database:
         condition: service_healthy
       configserver:
-        condition: service_started
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health | grep UP || exit 1"
+      interval: 1s
+      timeout: 5s
+      retries: 10
     networks:
       backend:
         aliases:
@@ -59,9 +69,14 @@ services:
       database:
         condition: service_healthy
       configserver:
-        condition: service_started
+        condition: service_healthy
       eurekaserver:
-        condition: service_started
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8072/actuator/health | grep UP || exit 1"
+      interval: 1s
+      timeout: 5s
+      retries: 10
     networks:
       backend:
         aliases:
@@ -78,7 +93,18 @@ services:
       database:
         condition: service_healthy
       configserver:
-        condition: service_started
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      gatewayserver:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 1s
+      timeout: 5s
+      retries: 10
     ports:
       - "8080:8080"
     networks:
@@ -95,7 +121,18 @@ services:
       database:
         condition: service_healthy
       configserver:
-        condition: service_started
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      gatewayserver:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
+      interval: 1s
+      timeout: 5s
+      retries: 10
     ports:
       - "8081:8081"
     networks:
@@ -110,6 +147,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
       ZOOKEEPER_INIT_LIMIT: 5
       ZOOKEEPER_SYNC_LIMIT: 2
+      KAFKA_OPTS: "-Dzookeeper.4lw.commands.whitelist=*"
     networks:
       backend:
         aliases:
@@ -132,12 +170,22 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     depends_on:
       - zookeeper
+    healthcheck:
+      test: [ "CMD", "kafka-topics", "--bootstrap-server", "kafka:9092", "--list" ]
+      interval: 1s
+      timeout: 10s
+      retries: 10
     networks:
       backend:
   redisserver:
     image: redis:alpine
     ports:
       - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli","ping" ]
+      interval: 1s
+      timeout: 10s
+      retries: 10
     networks:
       backend:
         aliases:

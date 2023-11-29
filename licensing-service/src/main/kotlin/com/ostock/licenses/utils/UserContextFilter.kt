@@ -17,10 +17,10 @@ class UserContextFilter : Filter {
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
         val httpServletRequest = request as HttpServletRequest
 
-        UserContextHolder.getContext().setCorrelationId(httpServletRequest.getHeader(UserContext.CORRELATION_ID))
-        UserContextHolder.getContext().setUserId(httpServletRequest.getHeader(UserContext.USER_ID))
-        UserContextHolder.getContext().setAuthToken(httpServletRequest.getHeader(UserContext.AUTH_TOKEN))
-        UserContextHolder.getContext().setOrganizationId(httpServletRequest.getHeader(UserContext.ORG_ID))
+        UserContextHolder.getContext().setCorrelationId(httpServletRequest.getHeader(UserContext.CORRELATION_ID) ?: "")
+        UserContextHolder.getContext().setUserId(httpServletRequest.getHeader(UserContext.USER_ID) ?: "")
+        UserContextHolder.getContext().setAuthToken(httpServletRequest.getHeader(UserContext.AUTH_TOKEN) ?: "")
+        UserContextHolder.getContext().setOrganizationId(httpServletRequest.getHeader(UserContext.ORG_ID) ?: "")
 
         logger.debug("UserContextFilter Correlation id: ${UserContextHolder.getContext().getCorrelationId()}")
 

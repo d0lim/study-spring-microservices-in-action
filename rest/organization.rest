@@ -1,0 +1,22 @@
+###
+GET http://localhost:8072/organization/d898a142-de44-466c-8c88-9ceb2c2429d3
+Authorization: token
+tmx-correlation-id: corrid
+tmx-user-id: userid
+tmx-org-id: orgorg
+
+###
+PUT http://localhost:8072/organization/d898a142-de44-466c-8c88-9ceb2c2429d3
+Authorization: token
+tmx-correlation-id: corrid
+tmx-user-id: userid
+tmx-org-id: orgorg
+Content-Type: application/json
+
+{
+  "id": "d898a142-de44-466c-8c88-9ceb2c2429d3",
+  "name": "newname",
+  "contactName": "dory dory",
+  "contactEmail": "dory@example.com",
+  "contactPhone": "secret"
+}
